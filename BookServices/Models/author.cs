@@ -4,7 +4,7 @@ using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BookService.Models
+namespace BookServices.Models
 {
     public class Author
     {
