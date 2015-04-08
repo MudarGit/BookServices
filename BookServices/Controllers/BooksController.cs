@@ -33,7 +33,7 @@ namespace BookServices.Controllers
 
         // GET: api/Books/5
         [ResponseType(typeof(Book))]
-        public async Task<IHttpActionResult> GetBook(int id)
+        public async Task<IHttpActionResult> GetBooks(int id)
         {
             Book book = await db.Books.FindAsync(id);
             if (book == null)
