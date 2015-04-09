@@ -14,9 +14,11 @@ namespace BookServices
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
-            config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            //config.SuppressDefaultHostAuthentication();
+            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html")); 
+            
             // Web API routes
             config.MapHttpAttributeRoutes();
 

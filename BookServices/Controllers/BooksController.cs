@@ -32,19 +32,6 @@ namespace BookServices.Controllers
         }
 
         // GET: api/Books/5
-        [ResponseType(typeof(Book))]
-        public async Task<IHttpActionResult> GetBooks(int id)
-        {
-            Book book = await db.Books.FindAsync(id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(book);
-        }
-
-        // PUT: api/Books/5
         [ResponseType(typeof(BookDetailDTO))]
         public async Task<IHttpActionResult> GetBook(int id)
         {
@@ -64,6 +51,39 @@ namespace BookServices.Controllers
             }
 
             return Ok(book);
+        } 
+        // PUT: api/Books/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutBook(int id, Book book)
+        {
+           if (!ModelState.IsValid)
+           {
+               return BadRequest(ModelState);
+           }
+
+            if (id != book.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(book).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BookExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return StatusCode(HttpStatusCode.NoContent);
         } 
 
         // POST: api/Books
